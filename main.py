@@ -6,7 +6,7 @@ from recipe import MENU
 def clear(): return os.system("cls") if os.name == "nt" else os.system("clear")
 
 
-SPACE = 30
+SPACE = 50
 
 resources = {
     "water": 3000,
@@ -137,11 +137,13 @@ def milk():
     resources["milk"] += 1000
     print("> Refill milk Success!🥛")
 
+
 def print_menu():
     clear()
     print("Today Coffee☕\t\t Price")
-    for i,coffee_name in enumerate(MENU.keys()):
+    for i, coffee_name in enumerate(MENU.keys()):
         print(f"{i+1}. {coffee_name.title()} \t\t ${load_cost(coffee_name)}")
+
 
 def help():
     print("*"*SPACE)
@@ -151,23 +153,22 @@ def help():
     print(f"'off':  \t\t\t Turn off the coffee machine")
     print(f"'<coffee_name>': \t\t\t Type the Coffe name to order")
     print("*"*SPACE)
-    print("Refill resources options:")    
+    print("Refill resources options:")
     print(f"'water': \t\t\t Refill 1000 of water")
     print(f"'milk': \t\t\t Refill 1000 of milk")
     print(f"'coffee': \t\t\t Refill 1000 of coffee")
     print("*"*SPACE)
-    
 
 
-def machine_router(command):    
+def machine_router(command):
     refill = {"water": water, "coffee": coffee, "milk": milk}
     if(command == "report"):
         report()
-    elif(command=="menu"):
+    elif(command == "menu"):
         print_menu()
     elif(command in list(MENU.keys())):
         make_coffee(command)
-    elif(command in ["water","coffee","milk"]):
+    elif(command in ["water", "coffee", "milk"]):
         refill[command]()
     elif(command == "off"):  # Shutdown
         return True
@@ -176,8 +177,10 @@ def machine_router(command):
     # No Shutdown, Continue Working
     return False
 
+
 def load_menu():
     return "/".join(MENU.keys())
+
 
 def cafee_machine():
     print_menu()
